@@ -1,0 +1,549 @@
+[
+ {
+  "client": "WEA",
+  "method": "POST",
+  "path": "/relayhub/negotiate",
+  "query": [
+   [
+    "negotiateVersion",
+    "1"
+   ]
+  ],
+  "headers": [
+   "accept",
+   "dcg-logicaldeviceid",
+   "dcg-appversion",
+   "dcg-appid",
+   "dcg-sessionid",
+   "dcg-ringname",
+   "dcg-os",
+   "dcg-osversion",
+   "dcg-partnerid",
+   "traceparent",
+   "tracestate",
+   "dcg-tracestate",
+   "dcg-heartbeatfrequency",
+   "x-requested-with",
+   "authorization"
+  ],
+  "body": null,
+  "status": 200
+ },
+ {
+  "client": "WEA",
+  "method": "POST",
+  "path": "/Dispatcher/Wake",
+  "query": [
+   [
+    "api-version",
+    "1.5.0"
+   ]
+  ],
+  "headers": [
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "Authorization",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "collapseKey": "string",
+   "data": {
+    "DCG-Environment": "string",
+    "IgnoreDeviceDisabledStatus": "string",
+    "DCG-RequestNewSession": "string",
+    "DCG-HubRegion": "string",
+    "DCG-CryptoWakeJwt": "string"
+   },
+   "deviceId": "string",
+   "priority": "string",
+   "ttl": "int"
+  },
+  "status": 200
+ },
+ {
+  "client": "WEA",
+  "method": "GET",
+  "path": "/DeviceAuthProxy/GetDeviceInfoList",
+  "query": [
+   [
+    "api-version",
+    "1.5.0"
+   ],
+   [
+    "filter",
+    ""
+   ],
+   [
+    "top",
+    "20"
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion"
+  ],
+  "body": null,
+  "status": 200
+ },
+ {
+  "client": "WEA",
+  "method": "GET",
+  "path": "/DeviceAuthProxy/GetAccountCert",
+  "query": [
+   [
+    "api-version",
+    "1.0.0"
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion"
+  ],
+  "body": null,
+  "status": 200
+ },
+ {
+  "client": "WEA",
+  "method": "POST",
+  "path": "/DeviceAuthProxy/UnlinkDevice",
+  "query": [
+   [
+    "api-version",
+    "1.5.0"
+   ],
+   [
+    "device-id",
+    "{id}"
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "Dcg-Token",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion"
+  ],
+  "body": null,
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "POST",
+  "path": "/Auth/GenerateNonce",
+  "query": [
+   [
+    "api-version",
+    "1.1.0"
+   ]
+  ],
+  "headers": [
+   "UserIdentityType",
+   "UserIdentityToken",
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "deviceId": "string"
+  },
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "POST",
+  "path": "/Auth/SignIn",
+  "query": [
+   [
+    "api-version",
+    "1.1.0"
+   ]
+  ],
+  "headers": [
+   "UserIdentityType",
+   "UserIdentityToken",
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "certificateJWT": "string"
+  },
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "GET",
+  "path": "/CloudRelay/Relay",
+  "query": [
+   [
+    "api-version",
+    "1.0.0"
+   ],
+   [
+    "isOnlyStun",
+    "false"
+   ]
+  ],
+  "headers": [
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "Authorization",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion"
+  ],
+  "body": null,
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "POST",
+  "path": "/DeviceAuthProxy/SetDeviceInfo",
+  "query": [
+   [
+    "api-version",
+    "1.5.0"
+   ],
+   [
+    "pop-device-key",
+    ""
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "Dcg-Token",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "certificates": {
+    "SelfSigned": [
+     "string"
+    ]
+   },
+   "metadata": {
+    "capabilities": [
+     "string"
+    ],
+    "clientType": "string",
+    "clientVersion": "string",
+    "consentVersion": "int",
+    "customData": "string",
+    "displayName": "string",
+    "isEnabled": "bool",
+    "manufacture": "string",
+    "modelName": "string",
+    "modelVersion": "string",
+    "osName": "string",
+    "osVersion": "string"
+   }
+  },
+  "status": 403
+ },
+ {
+  "client": "PL",
+  "method": "GET",
+  "path": "/EnvironmentDiscovery/UserServiceEnvironment",
+  "query": [
+   [
+    "api-version",
+    "1.0.0"
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion"
+  ],
+  "body": null,
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "POST",
+  "path": "/Auth/CreateIdentity",
+  "query": [
+   [
+    "api-version",
+    "1.1.0"
+   ]
+  ],
+  "headers": [
+   "UserIdentityType",
+   "UserIdentityToken",
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "certificateJWT": "string"
+  },
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "PUT",
+  "path": "/Registration/Register",
+  "query": [
+   [
+    "api-version",
+    "2.0.0"
+   ]
+  ],
+  "headers": [
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "Authorization",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "applicationId": "string",
+   "channelId": "string",
+   "channelType": "string",
+   "deviceId": "string"
+  },
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "POST",
+  "path": "/DeviceAuthProxy/EnrollDevice",
+  "query": [
+   [
+    "api-version",
+    "1.5.0"
+   ],
+   [
+    "pop-device-key",
+    ""
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "Dcg-Token",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "certificates": {
+    "SelfSigned": [
+     "string"
+    ]
+   },
+   "metadata": {
+    "capabilities": [
+     "string"
+    ],
+    "clientType": "string",
+    "clientVersion": "string",
+    "consentVersion": "int",
+    "customData": "string",
+    "displayName": "string",
+    "isEnabled": "bool",
+    "manufacture": "string",
+    "modelName": "string",
+    "modelVersion": "string",
+    "osName": "string",
+    "osVersion": "string"
+   }
+  },
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "POST",
+  "path": "/DevicePairingProxy/PairingSessions",
+  "query": [
+   [
+    "Api-Version",
+    "3.0.0"
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "clientRegionName",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion",
+   "Content-Type"
+  ],
+  "body": {
+   "flow": "string",
+   "optionalPermission": [
+    "string"
+   ]
+  },
+  "status": 200
+ },
+ {
+  "client": "PL",
+  "method": "GET",
+  "path": "/DevicePairingProxy/PairingSessions/{id}",
+  "query": [
+   [
+    "Api-Version",
+    "3.0.0"
+   ]
+  ],
+  "headers": [
+   "Authorization",
+   "Authorization-Type",
+   "traceparent",
+   "tracestate",
+   "DCG-TraceState",
+   "Accept",
+   "AuthorizationPortal",
+   "DCG-LogicalDeviceId",
+   "DCG-AppVersion",
+   "DCG-AppId",
+   "DCG-SessionId",
+   "DCG-RingName",
+   "DCG-OS",
+   "DCG-OSVersion"
+  ],
+  "body": null,
+  "status": 200
+ }
+]

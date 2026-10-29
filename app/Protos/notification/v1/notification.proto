@@ -1,0 +1,47 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package notification.v1;
+
+enum NotificationOperationType {
+  NOTIFICATION_OPERATION_TYPE_UNSPECIFIED = 0;
+  NOTIFICATION_OPERATION_TYPE_GET = 1;
+}
+
+enum NotificationsResponseStatus {
+  NOTIFICATIONS_RESPONSE_STATUS_UNSPECIFIED = 0;
+  NOTIFICATIONS_RESPONSE_STATUS_OK = 1;
+  NOTIFICATIONS_RESPONSE_STATUS_INVALID_REQUEST = 2;
+  NOTIFICATIONS_RESPONSE_STATUS_PERMISSION_NOT_GRANTED = 3;
+  NOTIFICATIONS_RESPONSE_STATUS_NO_NOTIFICATION = 4;
+  NOTIFICATIONS_RESPONSE_STATUS_UNKNOWN_ERROR = 5;
+}
+
+message NotificationInfo {
+  string key = 1;
+  string title = 2;
+  string text = 3;
+  string big_text = 4;
+  string app_name = 5;
+  string package_name = 6;
+  int64 post_time = 7;
+  int64 timestamp = 8;
+  string category = 9;
+  bool is_clearable = 10;
+  string sub_text = 11;
+  string conversation_title = 12;
+  int32 notification_class = 13;
+}
+
+message NotificationsRequestMessage {
+  NotificationOperationType type = 1;
+  repeated string keys = 2;
+  repeated int64 post_times = 3;
+}
+
+message NotificationsResponseMessage {
+  NotificationsResponseStatus status = 1;
+  repeated NotificationInfo notifications = 2;
+}

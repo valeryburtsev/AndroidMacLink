@@ -1,0 +1,16 @@
+// Recovered from YourPhone.YPP.SideChannel.Protocol.dll (TraceContextReflection.cs)
+// Embedded descriptor name: side_channel/v1/trace_context.proto
+syntax = "proto3";
+
+package side_channel.v1;
+
+option csharp_namespace = "YourPhone.YPP.SideChannel.Protocol.V1";
+
+option java_package = "com.microsoft.mmx.agents.ypp.sidechannel.protocol.v1";
+
+message SideChannelTraceContext {
+  string trace_id = 1;
+  string parent_id = 2;
+  string correlation_id = 3;
+  map<string, string> trace_state = 4;
+}

@@ -1,0 +1,18 @@
+// Recovered from YourPhone.YPP.PlatformSdk.Protocol.dll (MsaepMessageReflection.cs)
+// Embedded descriptor name: platform_sdk/v1/msaep_message.proto
+syntax = "proto3";
+
+package platform_sdk.v1;
+
+option csharp_namespace = "YourPhone.YPP.PlatformSdk.Protocol.V1";
+
+option java_package = "com.microsoft.mmx.agents.ypp.platformsdk.protocol.v1";
+
+message MsaepMessage {
+  int32 message_tag = 1;
+  string dcg_client_id = 2;
+  string message_id = 3;
+  bytes payload = 4;
+  int32 platform_major_version = 5;
+  int32 platform_minor_version = 6;
+}

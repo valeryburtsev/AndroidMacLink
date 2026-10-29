@@ -1,0 +1,52 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package contacts.v1;
+
+enum ContactResponseStatus {
+  CONTACT_RESPONSE_STATUS_UNSPECIFIED = 0;
+  CONTACT_RESPONSE_STATUS_OK = 1;
+  CONTACT_RESPONSE_STATUS_INVALID_REQUEST = 2;
+  CONTACT_RESPONSE_STATUS_PERMISSION_NOT_GRANTED = 3;
+  CONTACT_RESPONSE_STATUS_NO_CONTACT = 4;
+  CONTACT_RESPONSE_STATUS_UNKNOWN_ERROR = 5;
+}
+
+message ContactSearchRequestMessage {
+  string query = 1;
+  int32 max_results = 2;
+  string last_contact_id = 3;
+  bool allow_fuzzy = 4;
+  string start_date = 5;
+  string end_date = 6;
+}
+
+message ContactPhoneNumber {
+  string id = 1;
+  string type = 2;
+  string value = 3;
+  string display_value = 4;
+  string label = 5;
+  string description = 6;
+}
+
+message ContactItem {
+  string id = 1;
+  string display_name = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string nick_name = 5;
+  string company = 6;
+  string address = 7;
+  string last_modified_date_time = 8;
+  repeated ContactPhoneNumber phone_numbers = 9;
+}
+
+message ContactSearchResponseMessage {
+  ContactResponseStatus status = 1;
+  repeated ContactItem contacts = 2;
+  bool has_more = 3;
+  string error_detail = 4;
+}

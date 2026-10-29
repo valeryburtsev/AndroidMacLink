@@ -1,0 +1,27 @@
+// Recovered from YourPhone.YPP.PlatformSdk.Protocol.dll (DcgBaseMessageReflection.cs)
+// Embedded descriptor name: platform_sdk/v1/dcg_base_message.proto
+syntax = "proto3";
+
+package platform_sdk.v1;
+
+import "platform_sdk/v1/trace_context.proto";
+
+option csharp_namespace = "YourPhone.YPP.PlatformSdk.Protocol.V1";
+
+option java_package = "com.microsoft.mmx.agents.ypp.platformsdk.protocol.v1";
+
+enum ProtoDcgMessageType {
+  PROTO_DCG_MESSAGE_TYPE_UNSPECIFIED = 0;
+  PROTO_DCG_MESSAGE_TYPE_ACKNOWLEDGEMENT = 1;
+  PROTO_DCG_MESSAGE_TYPE_FRAGMENT = 2;
+  PROTO_DCG_MESSAGE_TYPE_PRESENCEANNOUNCEMENT = 3;
+  PROTO_DCG_MESSAGE_TYPE_PRESENCEREQUEST = 4;
+  PROTO_DCG_MESSAGE_TYPE_PRESENCERESPONSE = 5;
+}
+
+message ProtoDcgBaseMessage {
+  double version = 1;
+  ProtoDcgMessageType type = 2;
+  string session_id = 3;
+  ProtoTraceContext trace_context = 4;
+}

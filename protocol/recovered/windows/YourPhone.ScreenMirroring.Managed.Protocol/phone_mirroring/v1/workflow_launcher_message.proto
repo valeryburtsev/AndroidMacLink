@@ -1,0 +1,24 @@
+// Recovered from YourPhone.ScreenMirroring.Managed.Protocol.dll (WorkflowLauncherMessageReflection.cs)
+// Embedded descriptor name: phone_mirroring/v1/workflow_launcher_message.proto
+syntax = "proto3";
+
+package phone_mirroring.v1;
+
+option csharp_namespace = "YourPhone.PhoneMirroring.Protocol.V1";
+
+option java_package = "com.microsoft.appmanager.phonemirroring.protocol.v1";
+
+enum WorkflowType {
+  WORKFLOW_TYPE_EARLY_LAUNCH = 0;
+  WORKFLOW_TYPE_NEARBY = 1;
+  WORKFLOW_TYPE_PERMISSION = 2;
+  WORKFLOW_TYPE_APP_REMOTING = 3;
+}
+
+message WorkflowLaunchMessage {
+  WorkflowType workflow_type = 1;
+}
+
+message WorkflowLaunchResultMessage {
+  WorkflowType workflow_type = 1;
+}

@@ -1,0 +1,47 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+message SemanticSearchResponse {
+  repeated SemanticSearchResponseItem items = 1;
+}
+
+message SemanticSearchResponseItem {
+  string uri = 1;
+  string id = 2;
+  optional PhotoDataProperty photo_data = 3;
+  optional MessageDataProperty message_data = 4;
+  optional NoteDataProperty note_data = 5;
+  optional MessageContextDataProperty message_context_data = 6;
+}
+
+message PhotoDataProperty {
+  string name = 1;
+  string date = 2;
+  int32 size = 3;
+  string thumbnail = 4;
+  optional string extracted_text = 5;
+}
+
+message MessageDataProperty {
+  bool read = 1;
+  optional string contact_name = 2;
+  optional string address = 3;
+  string state = 4;
+  string type = 5;
+  string date = 6;
+  repeated string msgContextId = 7;
+}
+
+message NoteDataProperty {
+  string title = 1;
+  string chunk_text = 2;
+  string date = 3;
+}
+
+message MessageContextDataProperty {
+  string chunk_id = 1;
+  int32 expend = 2;
+  string contents = 3;
+}

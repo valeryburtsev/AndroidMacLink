@@ -1,0 +1,23 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package hotspot.v1;
+
+enum HotspotPermissionStatus {
+  HOTSPOT_PERMISSION_STATUS_UNSPECIFIED = 0;
+  HOTSPOT_PERMISSION_STATUS_OK = 1;
+  HOTSPOT_PERMISSION_STATUS_FEATURE_DISABLED = 2;
+  HOTSPOT_PERMISSION_STATUS_UNSUPPORTED = 3;
+}
+
+message HotspotConfigurationRequest {
+}
+
+message HotspotConfiguration {
+  HotspotPermissionStatus status = 1;
+  bool hotspot_user_consent = 2;
+  bool oem_bluetooth_permission = 3;
+  bool oem_bluetooth_rfcomm_enabled = 4;
+}

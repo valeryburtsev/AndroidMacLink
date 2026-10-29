@@ -1,0 +1,14 @@
+// Recovered from YourPhone.YPP.PlatformSdk.Protocol.dll (PubSubPayloadReflection.cs)
+// Embedded descriptor name: platform_sdk/v1/pub_sub_payload.proto
+syntax = "proto3";
+
+package platform_sdk.v1;
+
+option csharp_namespace = "YourPhone.YPP.PlatformSdk.Protocol.V1";
+
+option java_package = "com.microsoft.mmx.agents.ypp.platformsdk.protocol.v1";
+
+message PubSubPayload {
+  bytes data = 1;
+  bytes additional = 2;
+}

@@ -1,0 +1,24 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package platform_sdk.v1;
+
+import "platform_sdk/v1/trace_context.proto";
+
+enum ProtoDcgMessageType {
+  PROTO_DCG_MESSAGE_TYPE_UNSPECIFIED = 0;
+  PROTO_DCG_MESSAGE_TYPE_ACKNOWLEDGEMENT = 1;
+  PROTO_DCG_MESSAGE_TYPE_FRAGMENT = 2;
+  PROTO_DCG_MESSAGE_TYPE_PRESENCEANNOUNCEMENT = 3;
+  PROTO_DCG_MESSAGE_TYPE_PRESENCEREQUEST = 4;
+  PROTO_DCG_MESSAGE_TYPE_PRESENCERESPONSE = 5;
+}
+
+message ProtoDcgBaseMessage {
+  double version = 1;
+  ProtoDcgMessageType type = 2;
+  string session_id = 3;
+  ProtoTraceContext trace_context = 4;
+}

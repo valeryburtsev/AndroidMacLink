@@ -1,0 +1,64 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package clipboard.v1;
+
+import "google/protobuf/timestamp.proto";
+
+enum ClipboardRequestType {
+  CLIPBOARD_REQUEST_TYPE_UNSPECIFIED = 0;
+  CLIPBOARD_REQUEST_TYPE_CONTENT = 1;
+  CLIPBOARD_REQUEST_TYPE_FEATURE_ON = 2;
+  CLIPBOARD_REQUEST_TYPE_FEATURE_OFF = 3;
+  CLIPBOARD_REQUEST_TYPE_FEATURE_DISABLE = 4;
+  CLIPBOARD_REQUEST_TYPE_STATUS = 5;
+}
+
+enum ClipboardResponseStatus {
+  CLIPBOARD_RESPONSE_STATUS_UNSPECIFIED = 0;
+  CLIPBOARD_RESPONSE_STATUS_OK = 1;
+  CLIPBOARD_RESPONSE_STATUS_INVALID_DEVICE_RESOURCE_REQUEST_TYPE = 2;
+  CLIPBOARD_RESPONSE_STATUS_INVALID_DEVICE_RESOURCE_REQUEST_PATH = 3;
+  CLIPBOARD_RESPONSE_STATUS_INVALID_CLIPBOARD_REQUEST_TYPE = 4;
+  CLIPBOARD_RESPONSE_STATUS_UNRECOGNIZED_PAYLOAD = 5;
+  CLIPBOARD_RESPONSE_STATUS_CLIPBOARD_CHANGE = 6;
+  CLIPBOARD_RESPONSE_STATUS_INVALID_CONTENT = 7;
+  CLIPBOARD_RESPONSE_STATUS_FEATURE_ON = 8;
+  CLIPBOARD_RESPONSE_STATUS_FEATURE_OFF = 9;
+  CLIPBOARD_RESPONSE_STATUS_FEATURE_DISABLE = 10;
+}
+
+enum ClipboardItemType {
+  CLIPBOARD_ITEM_TYPE_UNSPECIFIED = 0;
+  CLIPBOARD_ITEM_TYPE_IMAGE = 1;
+  CLIPBOARD_ITEM_TYPE_TEXT_PLAIN = 2;
+  CLIPBOARD_ITEM_TYPE_TEXT_HTML = 3;
+}
+
+enum ClipboardErrorType {
+  CLIPBOARD_ERROR_TYPE_UNSPECIFIED = 0;
+  CLIPBOARD_ERROR_TYPE_REJECT = 1;
+  CLIPBOARD_ERROR_TYPE_FAIL = 2;
+}
+
+message ClipboardRequestMessage {
+  ClipboardRequestType request_type = 1;
+  string correlation_id = 2;
+}
+
+message ClipboardResponseMessage {
+  repeated ClipboardItem clipboard_item = 1;
+  ClipboardResponseStatus status = 2;
+  string correlation_id = 3;
+  ClipboardErrorType error_type = 4;
+  string error_detail = 5;
+}
+
+message ClipboardItem {
+  ClipboardItemType item_type = 1;
+  optional string text = 2;
+  optional bytes image_bytes = 3;
+  google.protobuf.Timestamp created_time = 4;
+}

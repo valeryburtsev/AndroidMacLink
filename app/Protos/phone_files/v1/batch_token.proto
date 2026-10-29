@@ -1,0 +1,17 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package phone_files.v1;
+
+message BatchedSyncContinuationToken {
+  int32 version = 1;
+  string volume = 2;
+  int64 snapshot_seq_no = 3;
+  int64 max_id_at_start = 4;
+  int64 last_id = 5;
+  int32 next_batch_index = 6;
+  int32 estimated_total_items = 7;
+  string session_id = 8;
+}

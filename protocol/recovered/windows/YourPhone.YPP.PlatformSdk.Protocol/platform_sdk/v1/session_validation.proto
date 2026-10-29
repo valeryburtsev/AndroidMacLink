@@ -1,0 +1,26 @@
+// Recovered from YourPhone.YPP.PlatformSdk.Protocol.dll (SessionValidationReflection.cs)
+// Embedded descriptor name: platform_sdk/v1/session_validation.proto
+syntax = "proto3";
+
+package platform_sdk.v1;
+
+option csharp_namespace = "YourPhone.YPP.PlatformSdk.Protocol.V1";
+
+option java_package = "com.microsoft.mmx.agents.ypp.platformsdk.protocol.v1";
+
+enum ProtoPlatformCapabilities {
+  PROTO_PLATFORM_CAPABILITIES_UNSPECIFIED = 0;
+  PROTO_PLATFORM_CAPABILITIES_SESSION_VALIDATION = 1;
+  PROTO_PLATFORM_CAPABILITIES_PERSISTENT_MESSAGE_CHANNEL = 2;
+  PROTO_PLATFORM_CAPABILITIES_NANO_TRANSPORT_PREFERENCE = 3;
+}
+
+message ProtoPlatformSessionValidationRequest {
+  repeated ProtoPlatformCapabilities platform_capabilities = 1;
+}
+
+message ProtoPlatformSessionValidationResponse {
+  repeated ProtoPlatformCapabilities platform_capabilities = 1;
+  int32 persistent_messaging_channel_version = 2;
+  int32 nano_transport_preference_version = 3;
+}

@@ -1,0 +1,28 @@
+// Recovered from YourPhone.YPP.PlatformSdk.Protocol.dll (DcgFragmentMessageReflection.cs)
+// Embedded descriptor name: platform_sdk/v1/dcg_fragment_message.proto
+syntax = "proto3";
+
+package platform_sdk.v1;
+
+import "platform_sdk/v1/dcg_base_message.proto";
+
+option csharp_namespace = "YourPhone.YPP.PlatformSdk.Protocol.V1";
+
+option java_package = "com.microsoft.mmx.agents.ypp.platformsdk.protocol.v1";
+
+enum ProtoTransportMessageType {
+  PROTO_TRANSPORT_MESSAGE_TYPE_UNSPECIFIED = 0;
+  PROTO_TRANSPORT_MESSAGE_TYPE_APP = 1;
+  PROTO_TRANSPORT_MESSAGE_TYPE_PLATFORM = 2;
+}
+
+message ProtoDcgFragmentMessage {
+  ProtoDcgBaseMessage base = 1;
+  int32 sequence_number = 2;
+  int32 message_id = 3;
+  int32 fragment_id = 4;
+  int32 fragment_count = 5;
+  ProtoTransportMessageType message_type = 6;
+  string handler_type = 7;
+  bytes raw = 8;
+}

@@ -1,0 +1,28 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package streaming.v1;
+
+enum StreamingCapabilityMask {
+  STREAMING_CAPABILITY_MASK_UNSPECIFIED = 0;
+  STREAMING_CAPABILITY_MASK_CAMERA = 1;
+}
+
+enum StreamingPermissionMask {
+  STREAMING_PERMISSION_MASK_UNSPECIFIED = 0;
+  STREAMING_PERMISSION_MASK_CAMERA = 1;
+}
+
+enum CorePermissionMask {
+  CORE_PERMISSION_MASK_UNSPECIFIED = 0;
+  CORE_PERMISSION_MASK_POST_NOTIFICATION = 1;
+}
+
+message StreamingConfigurationMessage {
+  uint32 is_capable = 1;
+  uint32 permissions_granted = 2;
+  uint32 core_permissions_granted = 3;
+  bool permissions_permanently_denied = 4;
+}

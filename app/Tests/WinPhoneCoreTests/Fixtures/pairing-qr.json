@@ -1,0 +1,110 @@
+[
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:25:22.0915765+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "PENDING_PAIRING_LINK_VISIT",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:35:21.9599636+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "region": "D2polandcentral"
+ },
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:25:27.1716523+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "PENDING_CHALLENGE_PIN_VALIDATE",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "challengePIN": "ABCDEF",
+  "challengePINExpireTime": "2026-10-09T08:28:25.1074028+00:00",
+  "clientAppId": "com.microsoft.appmanager",
+  "region": "D2polandcentral"
+ },
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:25:34.6045385+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "PENDING_PAIRING_PERMISSION_APPROVE",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "clientAppId": "com.microsoft.appmanager",
+  "region": "D2polandcentral"
+ },
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:25:49.9482685+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "PENDING_PAIRING_PERMISSION_APPROVE",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "clientAppId": "com.microsoft.appmanager",
+  "region": "D2polandcentral"
+ },
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:26:07.3285595+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "PENDING_PAIRING_PERMISSION_APPROVE",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "clientAppId": "com.microsoft.appmanager",
+  "region": "D2polandcentral"
+ },
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:26:24.7116506+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "PENDING_PAIRING_PERMISSION_APPROVE",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "clientAppId": "com.microsoft.appmanager",
+  "region": "D2polandcentral"
+ },
+ {
+  "pairingSessionId": "0fc5836e-bdf4-926e-82bb-2c59edaf0aa0",
+  "pairingSessionExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "currentServiceTime": "2026-10-09T08:26:42.3719177+00:00",
+  "flow": "QRLINK_CHALLENGEPIN_SIGNIN",
+  "optionalPermission": [
+   "ALL"
+  ],
+  "state": "DEVICE_PAIRED",
+  "pairingLink": "https://dcg.microsoft.com/dl?mvc=1000000&cpsi=cbca8fa9-79d0-a4a7-3d84-bee6424b2b62&vm=101&et=1791535221&r=5&ti=00000000000000000000000000000000",
+  "pairingLinkExpireTime": "2026-10-09T08:40:21.9599228+00:00",
+  "pairingLinkForSignInPINFlow": "aka.ms/PairPC",
+  "clientAppId": "com.microsoft.appmanager",
+  "region": "D2polandcentral",
+  "partnerDeviceKey": "PartnerDeviceKey~0000000000000000000000000000000000000000000000000000000000000000",
+  "partnerDcgClientId": "04d8655d-b2d2-a732-1782-fa97d6cad5e8"
+ }
+]

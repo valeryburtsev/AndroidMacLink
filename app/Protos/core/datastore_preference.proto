@@ -1,0 +1,20 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package proto.core;
+
+message DatastorePreference {
+  repeated DatastorePreferenceEntry entries = 1;
+}
+
+message DatastorePreferenceEntry {
+  string key = 1;
+  oneof value {
+    bool valueBool = 2;
+    int32 valueInt = 3;
+    int64 valueLong = 4;
+    string valueString = 5;
+  }
+}

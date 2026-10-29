@@ -1,0 +1,107 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package phone_files.v1;
+
+import "phone_files/v1/status.proto";
+import "phone_files/v1/metadata.proto";
+import "phone_files/v1/sync.proto";
+
+message FilesGetRequest {
+  string request_id = 4;
+  oneof request {
+    GetThumbnailRequest thumbnail_request = 1;
+    GetFilesMetadataSyncRequest files_metadata_sync_request = 2;
+    PrefetchThumbnailRequest prefetch_thumbnail_request = 3;
+  }
+}
+
+message PrefetchThumbnailRequest {
+  repeated FileMetadata metadata = 1;
+  string request_id = 2;
+  int32 width = 3;
+  int32 height = 4;
+}
+
+message GetFilesMetadataSyncRequest {
+  FilesSyncType sync_type = 1;
+  optional int64 seq_num = 2;
+  optional bool is_user_initiated = 3;
+  optional bool supports_batched_response = 4;
+  optional string batch_continuation_token = 5;
+  optional bool is_no_engagement_sync = 6;
+}
+
+message GetThumbnailRequest {
+  string target_uri = 1;
+  int64 target_checksum = 2;
+  int32 width = 3;
+  int32 height = 4;
+  string request_id = 5;
+}
+
+message FullFileSyncPayload {
+  repeated FileMetadata metadata = 1;
+  int64 ending_sequence_number = 2;
+  bool full_sync_max_capacity_reached = 3;
+  bool has_more_batches = 4;
+  string batch_continuation_token = 5;
+  int32 batch_index = 6;
+  int32 estimated_total_items = 7;
+  int64 provisional_ending_sequence_number = 8;
+}
+
+message FileSyncCreate {
+  FileMetadata metadata = 1;
+}
+
+message FileSyncUpdate {
+  FileMetadata metadata = 1;
+}
+
+message FileSyncDelete {
+  FileMetadata metadata = 1;
+}
+
+message IncrementalFileSync {
+  oneof operation {
+    FileSyncCreate create = 1;
+    FileSyncUpdate update = 2;
+    FileSyncDelete delete = 3;
+  }
+}
+
+message IncrementalFileSyncPayload {
+  repeated IncrementalFileSync sync_operation = 1;
+  int64 starting_sequence_number = 2;
+  int64 ending_sequence_number = 3;
+}
+
+message FilesGetResponse {
+  FilesResponseStatus status = 1;
+  string request_id = 5;
+  oneof response {
+    GetThumbnailResponse thumbnail_response = 2;
+    GetFilesMetadataSyncResponse files_metadata_sync_response = 3;
+    PrefetchThumbnailResponse prefetch_thumbnail_response = 4;
+  }
+}
+
+message GetThumbnailResponse {
+  FileMetadata metadata = 1;
+  bytes thumbnail = 2;
+  FilesResponseStatus status = 3;
+}
+
+message GetFilesMetadataSyncResponse {
+  oneof payload {
+    FullFileSyncPayload full_sync = 1;
+    IncrementalFileSyncPayload incremental_sync = 2;
+  }
+}
+
+message PrefetchThumbnailResponse {
+  repeated GetThumbnailResponse thumbnail_response = 1;
+}

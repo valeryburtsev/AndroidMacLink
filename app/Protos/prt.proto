@@ -1,0 +1,17 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto2";
+
+package PRT;
+
+message PRT {
+  required string refreshToken = 1;
+  required string idToken = 2;
+  required string homeAuthority = 3;
+  required uint64 acquisitionTimeMillis = 4;
+  required bool isRegisteredDevicePrt = 5;
+  required string prtProtocolVersion = 6;
+  optional string clientInfo = 7;
+  optional string deviceId = 8;
+}

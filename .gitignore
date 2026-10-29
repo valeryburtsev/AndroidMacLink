@@ -1,0 +1,23 @@
+# Never published: decompiled code, Microsoft's own files, recordings, personal data.
+corpus/
+captures/
+protocol/recovered/android/
+reference/
+third_party/
+evidence/live/
+*.apk
+*.pcap
+*.pcapng
+*.har
+*.mitm
+state.json
+
+# Build output and local tools
+app/.build/
+app/build/
+tools/.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.swiftpm/
+tools/.vm

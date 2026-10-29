@@ -1,0 +1,44 @@
+// Wire schema used by Phone Link and Link to Windows.
+// Field names and numbers recovered from Link to Windows 1.26082.130.0 and cross-checked against
+// Phone Link 1.26072.257.0. Rendered by tools/catalog/render_protos.py from a descriptor set.
+syntax = "proto3";
+
+package phone_mirroring.v1;
+
+message RequestPermissionMessage {
+  string permission = 1;
+}
+
+message CheckPermissionMessage {
+  string permission = 1;
+  string transaction_id = 2;
+}
+
+message ShowPermissionMessage {
+  string permission = 1;
+  string transaction_id = 2;
+}
+
+message LaunchSettingsMessage {
+  string permission = 1;
+  string transaction_id = 2;
+}
+
+message PermissionStatusMessage {
+  string status = 1;
+}
+
+message CheckPermissionResultMessage {
+  string transaction_id = 1;
+  string status = 2;
+}
+
+message ShowPermissionResultMessage {
+  string transaction_id = 1;
+  string status = 2;
+}
+
+message LaunchSettingsResultMessage {
+  string transaction_id = 1;
+  string status = 2;
+}

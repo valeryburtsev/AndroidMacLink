@@ -1,0 +1,13 @@
+// Recovered from YourPhone.Fre.Protocol.dll (ProximalOnboardingMessageReflection.cs)
+// Embedded descriptor name: fre/v1/proximal_onboarding_message.proto
+syntax = "proto3";
+
+package fre.v1;
+
+option csharp_namespace = "YourPhone.Fre.Protocol.V1";
+
+option java_package = "com.microsoft.appmanager.proximal";
+
+message ProximalOnboardingMessage {
+  string device_name = 1;
+}
