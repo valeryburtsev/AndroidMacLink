@@ -126,3 +126,8 @@ changes its service or apps.
 
 "Microsoft", "Phone Link" and "Link to Windows" are trademarks of Microsoft. "Samsung" and
 "Galaxy" are trademarks of Samsung. This project is not endorsed by either company.
+
+## License
+
+[MIT](LICENSE). The app depends on Apple's [SwiftProtobuf](https://github.com/apple/swift-protobuf),
+which is under the Apache License 2.0 and is fetched by Swift Package Manager, not included here.
