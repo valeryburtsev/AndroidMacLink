@@ -140,7 +140,7 @@ final class ClipboardSyncTests: XCTestCase {
     }
 
     /// `phoneClip` is what the fake phone returns for a CONTENT request.
-    func makeRig(local: ClipboardContent? = nil, phoneClip: ClipboardContent? = .text("from phone")) async throws -> Rig {
+    func makeRig(local: ClipboardContent? = nil, phoneClip: ClipboardContent? = .text("from phone"), rewatchAfter: Duration? = nil, enabled: Bool = true) async throws -> Rig {
         let phone = FakePhone()
         phone.responder = { envelope in
             guard envelope.route == "/DeviceResourceManager",
@@ -165,8 +165,8 @@ final class ClipboardSyncTests: XCTestCase {
         let publisher = ContextPublisher(messenger: messenger, ownId: ownId)
         await publisher.start()
         let clipboard = TestClipboard(local)
-        let sync = ClipboardSync(resources: resources, publisher: publisher, local: clipboard)
-        try await sync.start()
+        let sync = ClipboardSync(resources: resources, publisher: publisher, local: clipboard, rewatchAfter: rewatchAfter)
+        try await sync.start(enabled: enabled)
         return Rig(phone: phone, relay: relay, sync: sync, clipboard: clipboard)
     }
 
@@ -196,6 +196,38 @@ final class ClipboardSyncTests: XCTestCase {
         let rig = try await makeRig()
         // Same bytes as the captured FEATURE_OFF request, with request type 2 instead of 3.
         XCTAssertEqual(rig.phone.received(route: "/DeviceResourceManager").first?.payload.hex, "080410011a020802220a2f636c6970626f617264")
+        await rig.relay.close()
+    }
+
+    /// A FEATURE_ON alone does not make the phone watch its clipboard again after a reconnect
+    /// (seen 2026-10-31); off and on, once the link has settled, does.
+    func testOnceSettledThePhoneIsMadeToWatchItsClipboardAgain() async throws {
+        let rig = try await makeRig(rewatchAfter: .milliseconds(30))
+        let types: () -> [Clipboard_V1_ClipboardRequestType] = { [self] in clipboardRequests(rig.phone).map(\.requestType) }
+        let done = await waitUntil { types().count == 3 }
+        XCTAssertTrue(done)
+        XCTAssertEqual(types(), [.featureOn, .featureOff, .featureOn])
+        let enabled = await rig.sync.isEnabled
+        XCTAssertTrue(enabled)
+        await rig.relay.close()
+    }
+
+    /// A connection made with the switch off stays off: the phone is told so, and is not
+    /// prompted to watch its clipboard.
+    func testAConnectionMadeWithTheSwitchOffKeepsTheClipboardPrivate() async throws {
+        let rig = try await makeRig(local: .text("private"), rewatchAfter: .milliseconds(30), enabled: false)
+        try await Task.sleep(for: .milliseconds(150))
+        XCTAssertEqual(clipboardRequests(rig.phone).map(\.requestType), [.featureOff])
+        let announced = try await rig.sync.localClipboardChanged()
+        XCTAssertNil(announced, "a copy here is not announced")
+        await rig.relay.close()
+    }
+
+    func testAClipboardSwitchedOffHereIsNotTurnedBackOn() async throws {
+        let rig = try await makeRig(rewatchAfter: .milliseconds(200))
+        try await rig.sync.setEnabled(false)
+        try await Task.sleep(for: .milliseconds(400))
+        XCTAssertEqual(clipboardRequests(rig.phone).map(\.requestType), [.featureOn, .featureOff])
         await rig.relay.close()
     }
 

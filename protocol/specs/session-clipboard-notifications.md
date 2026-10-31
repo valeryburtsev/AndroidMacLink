@@ -1201,3 +1201,15 @@ Windows reads types strictly: nested maps must be Object, flags Bool, masks Int3
 9. **Tag 8 publish body** (42 bytes, C-pair) was not decoded against a proto.
 10. **`/PlatformDisconnectRequest`** carried JSON `{}` although a protobuf with a reason enum
     exists (P: platform_sdk/v1/platform_message.proto); the phone's handling was not read.
+
+## Clipboard watcher after a reconnect
+
+The phone listens for clipboard changes only while it counts a WEA client as active and has the
+feature on for it, and decides that when a connection changes state
+(A: agents.clipboard.ClipboardListenerManager). FEATURE_ON for a client already marked on returns
+without deciding again (A: agents.clipboard.platform.ClipboardPeerDeviceStatusUpdater). So a
+decision taken before the WEA link is back leaves the phone deaf: nothing is published when the
+user copies there, though content requests for the PC's clipboard still work. Seen live on
+2026-10-31; turning the feature off and on restored it. The client therefore sends FEATURE_OFF
+then FEATURE_ON three seconds after each WEA start. FEATURE_OFF also deletes the phone's clipboard
+history for that client.

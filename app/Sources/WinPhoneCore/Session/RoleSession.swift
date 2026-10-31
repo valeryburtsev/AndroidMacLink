@@ -49,6 +49,8 @@ public actor RoleSession {
         /// Whether to sync the call history, asked at each connect. Off unless the user
         /// turned it on: it flips a phone-wide switch, and no capture confirms the exchange.
         public var callLogsEnabled: @Sendable () -> Bool = { false }
+        /// Whether the clipboard is shared, asked at each connect.
+        public var clipboardEnabled: @Sendable () -> Bool = { true }
         /// Whether files the phone shares are taken, asked at each connect.
         public var filesEnabled: @Sendable () -> Bool = { false }
         /// Where files from the phone are written while they arrive. Without it they are
@@ -270,8 +272,9 @@ public actor RoleSession {
             // Nothing is asked of the phone until the user wants to see its files.
             storage = await PhoneFilesSync(resources: connection.resources, publisher: connection.publisher)
             if let local = dependencies.localClipboard {
-                let clipboard = ClipboardSync(resources: connection.resources, publisher: connection.publisher, local: local)
-                try await clipboard.start()
+                // Once the link has settled, so that the phone counts it as active.
+                let clipboard = ClipboardSync(resources: connection.resources, publisher: connection.publisher, local: local, rewatchAfter: .seconds(3))
+                try await clipboard.start(enabled: dependencies.clipboardEnabled())
                 self.clipboard = clipboard
             }
             // Informational exchanges: do not hold up the session if the phone is slow to answer.

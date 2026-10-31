@@ -399,6 +399,20 @@ final class AppModelTests: XCTestCase {
         XCTAssertEqual(later.notifyingApps.map(\.name), ["Calendar", "Mail", "Messages"])
     }
 
+    func testTheClipboardSwitchIsRemembered() throws {
+        let suite = "winphone.tests.\(UUID().uuidString)"
+        let store = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { store.removePersistentDomain(forName: suite) }
+        let first = AppModel()
+        first.preferenceStore = store
+        XCTAssertTrue(first.clipboardSyncEnabled, "on until the user says otherwise")
+        first.clipboardSyncEnabled = false
+        let second = AppModel()
+        second.preferenceStore = store
+        XCTAssertFalse(second.clipboardSyncEnabled)
+        XCTAssertEqual(store.object(forKey: AppModel.clipboardEnabledKey) as? Bool, false, "where each connection looks it up")
+    }
+
     func testRevealingANotificationSelectsItsSectionAndBringsTheWindowForward() {
         let model = AppModel()
         var shown = 0

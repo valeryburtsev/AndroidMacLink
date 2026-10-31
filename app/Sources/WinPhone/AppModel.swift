@@ -533,6 +533,7 @@ final class AppModel: ObservableObject {
             linksOpenAtOnce = store.bool(forKey: AppModel.linksOpenAtOnceKey)
             callDeviceAddress = store.string(forKey: AppModel.callDeviceKey)
             filesEnabled = store.object(forKey: AppModel.filesEnabledKey) as? Bool ?? true
+            clipboardSyncEnabled = store.object(forKey: AppModel.clipboardEnabledKey) as? Bool ?? true
             receivedFiles = FileHistory.load(from: store)
             screenSound = store.bool(forKey: AppModel.screenSoundKey)
             screenInOwnWindow = store.bool(forKey: AppModel.screenOwnWindowKey)
@@ -614,7 +615,12 @@ final class AppModel: ObservableObject {
         return names.map { (package: $0.key, name: $0.value, icon: apps[$0.key]?.icon) }
             .sorted { ($0.name.localizedLowercase, $0.package) < ($1.name.localizedLowercase, $1.package) }
     }
-    @Published var clipboardSyncEnabled = true
+    /// Remembered, and asked at each connect: a new connection must not share the clipboard
+    /// again behind a switch that says it is off.
+    @Published var clipboardSyncEnabled = true {
+        didSet { if clipboardSyncEnabled != oldValue { preferenceStore?.set(clipboardSyncEnabled, forKey: AppModel.clipboardEnabledKey) } }
+    }
+    nonisolated static let clipboardEnabledKey = "clipboard.enabled"
     @Published var lastClipboardEvent: String?
     /// What crossed between the two clipboards in this run, newest first: the kind and the
     /// time only, never what was copied.

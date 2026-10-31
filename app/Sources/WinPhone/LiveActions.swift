@@ -100,6 +100,7 @@ final class LiveActions: AppActions {
         dependencies.prepareForConnect = { await keys.refresh() }
         dependencies.callLogsEnabled = { UserDefaults.standard.bool(forKey: AppModel.callsEnabledKey) }
         dependencies.filesEnabled = { UserDefaults.standard.object(forKey: AppModel.filesEnabledKey) as? Bool ?? true }
+        dependencies.clipboardEnabled = { UserDefaults.standard.object(forKey: AppModel.clipboardEnabledKey) as? Bool ?? true }
         // Files are written here while they arrive and moved to Downloads when whole.
         ReceivedFiles.clearIncoming()
         dependencies.incomingFilesDirectory = ReceivedFiles.incomingFolder

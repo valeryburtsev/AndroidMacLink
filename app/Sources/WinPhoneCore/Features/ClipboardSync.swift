@@ -66,6 +66,9 @@ public actor ClipboardSync {
     private let resources: DeviceResources
     private let publisher: ContextPublisher
     private let local: LocalClipboard
+    /// How long after the start to make the phone look at its clipboard watcher again; nil
+    /// leaves that out. See `promptPhoneToWatch`.
+    private let rewatchAfter: Duration?
     /// What we last wrote from the phone, so the resulting local change is not announced back.
     private var lastFromPeer: ClipboardContent?
     /// What we last announced, to avoid announcing the same content twice.
@@ -76,22 +79,55 @@ public actor ClipboardSync {
     /// Content pulled from the phone and written locally, in order.
     public nonisolated let received: AsyncStream<ClipboardContent>
 
-    public init(resources: DeviceResources, publisher: ContextPublisher, local: LocalClipboard) {
+    public init(resources: DeviceResources, publisher: ContextPublisher, local: LocalClipboard, rewatchAfter: Duration? = nil) {
         self.resources = resources
         self.publisher = publisher
         self.local = local
+        self.rewatchAfter = rewatchAfter
         (received, continuation) = AsyncStream.makeStream(of: ClipboardContent.self, bufferingPolicy: .bufferingNewest(16))
     }
 
-    /// Registers handlers and tells the phone the feature is on.
-    public func start() async throws {
+    /// Registers handlers and tells the phone whether the feature is on.
+    public func start(enabled: Bool = true) async throws {
         await resources.serve(ClipboardSync.resourcePath) { [weak self] request in
             await self?.answer(request)
         }
         await publisher.subscribe(.clipboard) { [weak self] publication in
             await self?.received(publication)
         }
-        try await setEnabled(true)
+        try await setEnabled(enabled)
+        if enabled, let rewatchAfter {
+            Task { [weak self] in
+                try? await Task.sleep(for: rewatchAfter)
+                await self?.promptPhoneToWatch()
+            }
+        }
+    }
+
+    /// Makes the phone watch its clipboard again, by turning the feature off and on.
+    ///
+    /// The phone watches its clipboard only while a WEA client is active, and decides that when
+    /// a connection changes state. If it decides before this link is back, it stops watching,
+    /// and a plain FEATURE_ON does not help: for a client already marked on it returns without
+    /// deciding again. Copies on the phone then never arrive, while copies on the Mac still do
+    /// (seen 2026-10-31). A FEATURE_OFF first makes the FEATURE_ON count. It also clears the
+    /// phone's clipboard history for this client.
+    func promptPhoneToWatch() async {
+        guard isEnabled else { return }
+        do {
+            var off = Clipboard_V1_ClipboardRequestMessage()
+            off.requestType = .featureOff
+            _ = try await send(off)
+            // Switched off here meanwhile: off is what the phone should stay.
+            guard isEnabled else { return }
+            var on = Clipboard_V1_ClipboardRequestMessage()
+            on.requestType = .featureOn
+            _ = try await send(on)
+            diag("clipboard", "asked the phone to watch its clipboard again")
+        } catch {
+            // The next connection tells it again.
+            diag("clipboard", "could not ask the phone to watch its clipboard again: \(error)")
+        }
     }
 
     /// Turns sync on or off and tells the phone.
@@ -158,8 +194,15 @@ public actor ClipboardSync {
         case .clipboardChange:
             guard isEnabled else { return }
             // Pull without holding up the handler queue: the phone may take a while to answer.
+            diag("clipboard", "the phone says its clipboard changed")
             let correlation = message.correlationID
-            Task { _ = try? await self.pull(correlationId: correlation) }
+            Task {
+                do {
+                    _ = try await self.pull(correlationId: correlation)
+                } catch {
+                    diag("clipboard", "could not fetch it from the phone: \(error)")
+                }
+            }
         case .featureOn: peerState = .on
         case .featureOff: peerState = .off
         case .featureDisable: peerState = .disabled
